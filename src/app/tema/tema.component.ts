@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
-import { environment } from './../../environments/environment.prod';
 import { Component, OnInit } from '@angular/core';
+import { environment } from './../../environments/environment.prod';
+import { Router } from '@angular/router';
 import { Tema } from '../model/Tema';
 import { TemaService } from '../service/tema.service';
 
@@ -11,7 +11,7 @@ import { TemaService } from '../service/tema.service';
 })
 export class TemaComponent implements OnInit {
 
-  tema:Tema = new Tema()
+  tema: Tema = new Tema()
   listaTemas: Tema[]
 
   constructor(
@@ -20,24 +20,24 @@ export class TemaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(environment.token == ''){
+    if (environment.token == '') {
       this.router.navigate(['/entrar'])
     }
 
     this.findAllTemas()
-
   }
 
-  findAllTemas(){
-    this.temaService.getAllTema().subscribe((resp:Tema[]) =>{
+  findAllTemas() {
+    this.temaService.getAllTema().subscribe((resp: Tema[]) => {
       this.listaTemas = resp
     })
   }
 
-  cadastrar(){
-    this.temaService.postTema(this.tema).subscribe((resp: Tema)=>{
+
+  cadastrar() {
+    this.temaService.postTema(this.tema).subscribe((resp: Tema) => {
       this.tema = resp
-      alert('Tema cadastro com sucesso!')
+      alert('Tema cadastrado com sucesso!')
       this.findAllTemas()
       this.tema = new Tema()
     })
